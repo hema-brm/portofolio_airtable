@@ -45,8 +45,9 @@ cd ../frontend
 npm i
 ```
 
+```bash
 docker compose up
-
+```
 
 ### Technologies utilisées
 
