@@ -23,7 +23,11 @@
 - Créer un .env dans le dossier backend/ et mettre : 
 ``
     AIRTABLE_PERSONAL_TOKEN=METTRE_LE_TOKEN_CREE_PLUS_HAUT
+``
+``
     AIRTABLE_BASE_ID=appZ8WVg10DOpVw6X
+``
+``
     JWT_SECRET=esgi-portfolio-secret-2025-hema
 ``
 
