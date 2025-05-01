@@ -15,21 +15,15 @@
 
  
 - Créer un .env dans le dossier frontend/ et mettre : 
-``
-    NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-``
+
+    - ``NEXT_PUBLIC_BACKEND_URL=http://localhost:8000``
 
 
 - Créer un .env dans le dossier backend/ et mettre : 
-``
-    AIRTABLE_PERSONAL_TOKEN=METTRE_LE_TOKEN_CREE_PLUS_HAUT
-``
-``
-    AIRTABLE_BASE_ID=appZ8WVg10DOpVw6X
-``
-``
-    JWT_SECRET=esgi-portfolio-secret-2025-hema
-``
+
+    - ``AIRTABLE_PERSONAL_TOKEN=METTRE_LE_TOKEN_CREE_PLUS_HAUT``
+    - ``AIRTABLE_BASE_ID=appZ8WVg10DOpVw6X``
+    - ``JWT_SECRET=esgi-portfolio-secret-2025-hema``
 
 ➡️ **Se placer à la racine du projet** faire les commandes suivantes :
 
