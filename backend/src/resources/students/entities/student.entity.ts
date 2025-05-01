@@ -5,8 +5,6 @@ export class Student {
   fullName: string;
   email: string;
   github: string;
-  linkedIn: string;
-  promotion: string;
   projects: string[];
   projectsTotal: number;
 }

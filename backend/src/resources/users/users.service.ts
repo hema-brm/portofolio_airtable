@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AirtableService } from 'src/database/airtable.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -25,6 +25,10 @@ export class UsersService {
   }
 
   async create(dto: CreateUserDto): Promise<User> {
+    const existing = await this.findByEmail(dto.email);
+    if (existing) {
+      throw new BadRequestException('Cet email est déjà utilisé.');
+    }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(dto.password, salt);
 

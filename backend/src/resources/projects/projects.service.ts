@@ -21,11 +21,24 @@ export class ProjectsService {
   }
 
   async findOneBySlug(slug: string): Promise<Project | null> {
-    return this.airtableService.findOneByField<Project>(
+    const project = await this.airtableService.findOneByField<Project>(
       this.tableName,
       'slug',
       slug,
     );
+
+    if (!project) return null;
+
+    const likeIps = await this.enrichLikes(project.likes || []);
+
+    return {
+      ...project,
+      likes: likeIps,
+    };
+  }
+
+  async findOneById(id: string): Promise<Project> {
+    return this.airtableService.getById<Project>(this.tableName, id);
   }
 
   async create(dto: CreateProjectDto): Promise<Project> {
@@ -42,5 +55,14 @@ export class ProjectsService {
 
   async unpublish(id: string) {
     return this.update(id, { isPublished: false });
+  }
+
+  private async enrichLikes(ids: string[]) {
+    const records = await Promise.all(
+      ids.map((id) =>
+        this.airtableService.getById<{ ipAddress: string }>('Likes', id),
+      ),
+    );
+    return records.map((r) => r?.ipAddress).filter((ip): ip is string => !!ip);
   }
 }

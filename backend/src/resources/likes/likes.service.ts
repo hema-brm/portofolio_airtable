@@ -28,12 +28,12 @@ export class LikesService {
   }
 
   async remove(ipAddress: string, projectId: string): Promise<void> {
-    const likes = await this.airtableService.get<Like>(this.tableName, {
-      filterByFormula: `AND({ipAddress} = "${ipAddress}", ARRAYJOIN({project}) = "${projectId}")`,
-      maxRecords: '1',
+    const likesByIp = await this.airtableService.get<Like>(this.tableName, {
+      filterByFormula: `{ipAddress} = "${ipAddress}"`,
     });
 
-    const like = likes[0];
+    const like = likesByIp.find((like) => like.project?.includes(projectId));
+    
     if (like) {
       await this.airtableService.delete(this.tableName, like.id);
     }

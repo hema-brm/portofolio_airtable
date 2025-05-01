@@ -14,9 +14,11 @@ interface ProjectCardProps {
   studentAvatars: { avatarUrl: string; fullName: string }[];
   likes: number;
   slug: string;
+  isPublished: boolean;
+  isAdmin: boolean;
 }
 
-export function ProjectCard({ title, imageUrl, technologies, studentAvatars, likes, slug }: ProjectCardProps) {
+export function ProjectCard({ title, imageUrl, technologies, studentAvatars, likes, slug, isAdmin, isPublished }: ProjectCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleTechs, setVisibleTechs] = useState<string[]>([]);
   const [remainingTechs, setRemainingTechs] = useState<number>(0);
@@ -69,6 +71,11 @@ export function ProjectCard({ title, imageUrl, technologies, studentAvatars, lik
           height={300}
           className="object-cover w-full h-48 md:h-56"
         />
+        {isAdmin && !isPublished && (
+          <span className="absolute top-2 left-2 text-xs px-2 py-1 rounded bg-yellow-400/70 text-white backdrop-blur-sm border border-white/20">
+            Non publié
+          </span>
+        )}
         
         <div className="absolute top-2 right-2 flex items-center bg-black/60 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm gap-1">
           <Heart className="w-4 h-4 text-red-500" />

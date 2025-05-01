@@ -3,9 +3,12 @@ import { handleResponse } from '@/services/fetcher';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function fetchAllProjects(): Promise<Project[]> {
+export async function fetchAllProjects(token: string): Promise<Project[]> {
   const res = await fetch(`${BASE_URL}/projects/admin/all`, {
-    cache: "no-store",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    cache: 'no-store',
   });
   return handleResponse<Project[]>(res);
 }
@@ -43,3 +46,4 @@ export async function unpublishProject(id: string, token: string): Promise<Proje
   });
   return handleResponse<Project>(res);
 }
+

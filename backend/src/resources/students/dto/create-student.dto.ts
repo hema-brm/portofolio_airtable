@@ -13,11 +13,4 @@ export class CreateStudentDto {
   @IsOptional()
   @IsUrl()
   github?: string;
-
-  @IsOptional()
-  @IsUrl()
-  linkedIn?: string;
-
-  @IsString()
-  promotion: string;
 }

@@ -5,10 +5,8 @@ export interface Student {
     fullName: string;
     email: string;
     gitHub: string;
-    linkedIn: string;
     projectsInvolved: string;
     projects: string[];
     projectsTotal: number;
-    promotion: string;
   }
   

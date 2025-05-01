@@ -7,6 +7,7 @@ export class Project {
   slug: string;
   description?: string;
   isPublished: boolean;
+  likes?: string[];
   students: Student[];
   technologies: Technology[];
   mainImage: string;

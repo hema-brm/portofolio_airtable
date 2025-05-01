@@ -12,15 +12,13 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(dto: LoginDto): Promise<string> {
+  async login(dto: LoginDto): Promise<{token: string}> {
     const user = await this.usersService.findByEmail(dto.email);
-
     if (!user) {
-      throw new UnauthorizedException('Incorrect email and/or password.');
+      throw new UnauthorizedException('fdbdb Incorrect email and/or password.');
     }
 
     const isPasswordValid = await bcrypt.compare(dto.password, user.password);
-
     if (!isPasswordValid) {
       throw new UnauthorizedException('Incorrect email and/or password.');
     }
@@ -30,9 +28,9 @@ export class AuthService {
       email: user.email,
       role: user.role,
     };
-
+    
     const token = this.jwtService.sign(payload);
-
-    return token;
+    
+    return { token };
   }
 }
